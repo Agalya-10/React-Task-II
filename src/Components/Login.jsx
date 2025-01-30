@@ -68,8 +68,8 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <form className="form2" onSubmit={this.handleSubmit}>
-          <h1 className="head1" style={{ textAlign: "center" }}>Form</h1>
+        <form className="form4" onSubmit={this.handleSubmit}>
+          <h1 className="head" style={{ textAlign: "center" }}>Form</h1>
           <label className="label2">
             Name
             <input
@@ -165,12 +165,12 @@ class Login extends Component {
           </div>
           <br />
           <div style={{ display: "flex", gap: "10px" }}>
-            <button type="submit" className="button2">
+            <button type="submit" className="button4">
               {this.state.isEditing ? "Update" : "Add"}
             </button>
             <button
               type="button"
-              className="button3"
+              className="button5"
               onClick={() =>
                 this.setState({
                   formData: {
@@ -211,8 +211,8 @@ class Login extends Component {
                 <td>{data.gender}</td>
                 <td>{data.date}</td>
                 <td style={{ gap: "10px", textAlign: "center" }}>
-                  <button className="button2" onClick={() => this.handleEdit(index)}>Edit</button>
-                  <button className="button3 ms-1" onClick={() => this.handleDelete(index)}>Delete</button>
+                  <button className="button4" onClick={() => this.handleEdit(index)}>Edit</button>
+                  <button className="button5 ms-1" onClick={() => this.handleDelete(index)}>Delete</button>
                 </td>
               </tr>
             ))}
