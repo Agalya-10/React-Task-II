@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-class Login extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -204,6 +204,7 @@ class Login extends Component {
             {this.state.tableData.map((data, index) => (
               <tr key={index}>
                  <td>{index + 1}</td>
+                 
                 <td>{data.Name}</td>
                 <td>{data.address}</td>
                 <td>{data.Age}</td>
@@ -222,5 +223,4 @@ class Login extends Component {
     );
   }
 }
-
-export default Login;
+export default Profile;

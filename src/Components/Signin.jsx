@@ -73,6 +73,7 @@ class Signin extends Component {
     this.setState((prevState) => ({
       passwordVisible: !prevState.passwordVisible,
     }));
+    
   };
 
   render() {
