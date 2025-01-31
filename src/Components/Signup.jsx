@@ -11,6 +11,7 @@ class Signup extends Component {
       mobile: '',
       password: '',
       confirmPassword: '',
+      role:'',
       acceptTerms: false,
       passwordVisible: false,
       confirmPasswordVisible: false,
@@ -28,6 +29,8 @@ class Signup extends Component {
         mobile: rowData.mobile,
         password: rowData.password,
         confirmPassword: rowData.confirmPassword,
+        role: rowData.role,
+
       });
     }
   }
@@ -40,7 +43,7 @@ class Signup extends Component {
   };
 
   validateForm = () => {
-    const { firstname, lastname, email, mobile, password, confirmPassword, acceptTerms } = this.state;
+    const { firstname, lastname, email, mobile, password, confirmPassword,role, acceptTerms } = this.state;
     let isValid = true;
     let errors = {};
 
@@ -73,6 +76,10 @@ class Signup extends Component {
       isValid = false;
       errors.confirmPassword = 'Passwords do not match';
     }
+    if (!role) {
+      isValid = false;
+      errors.role = 'Role is required';
+    }
 
     if (!acceptTerms) {
       isValid = false;
@@ -85,10 +92,11 @@ class Signup extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const { firstname, lastname, email, mobile, password, confirmPassword, acceptTerms } = this.state;
+    const { firstname, lastname, email, mobile, password, confirmPassword,role,acceptTerms } = this.state;
 
     // Validate the form
     if (!this.validateForm()) {
+
       return;
     }
 
@@ -148,6 +156,7 @@ class Signup extends Component {
       acceptTerms,
       passwordVisible,
       confirmPasswordVisible,
+      role,
       errors,
       navigateToDatastorage,
     } = this.state;
@@ -157,7 +166,7 @@ class Signup extends Component {
     }
 
     return (
-        <form className="form2" style={{ width: '400px' }} onSubmit={this.handleSubmit}>
+        <form className="form2" style={{ width: '500px' }} onSubmit={this.handleSubmit}>
           <h1 className="head1">{this.props.location?.state?.rowData ? 'Edit Form' : 'Register Form'}</h1>
           <div style={{ display: 'flex' }}>
             <div className="label1 mt-3" style={{ width: '100%' }}>
@@ -277,6 +286,29 @@ class Signup extends Component {
             </div>
             {errors?.confirmPassword && <span className="error">{errors.confirmPassword}</span>}
           </div>
+          <div className="label2" style={{ width: '100%' }}>
+          <label>
+           Role
+            </label>
+            <select
+              className="box3"
+              name="role"
+              value={role}
+              onChange={this.handleChange}
+              placeholder="Role"
+              style={{ width: '100%' }}
+
+            >
+              <option value="" disabled>
+                Select a Role
+              </option>
+              <option value="Admin">Admin</option>
+              <option value="User">User</option>
+              </select>
+             
+              {errors?.role && <span className="error">{errors.role}</span>}
+
+              </div>
           <div style={{ margin: '15px 0' }}>
             <label>
               <input
