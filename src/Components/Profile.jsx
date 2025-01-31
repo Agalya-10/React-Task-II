@@ -204,6 +204,7 @@ class Profile extends Component {
             {this.state.tableData.map((data, index) => (
               <tr key={index}>
                  <td>{index + 1}</td>
+                 
                 <td>{data.Name}</td>
                 <td>{data.address}</td>
                 <td>{data.Age}</td>
@@ -222,5 +223,4 @@ class Profile extends Component {
     );
   }
 }
-
 export default Profile;
