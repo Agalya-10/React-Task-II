@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 
@@ -11,11 +12,13 @@ class Signup extends Component {
       mobile: '',
       password: '',
       confirmPassword: '',
-      role:'',
+      role: '',
       acceptTerms: false,
       passwordVisible: false,
       confirmPasswordVisible: false,
       navigateToDatastorage: false,
+      navigateToRolePage: false, // Track role-based navigation
+      rolePage: '', // Store the role-based URL
     };
   }
 
@@ -30,7 +33,6 @@ class Signup extends Component {
         password: rowData.password,
         confirmPassword: rowData.confirmPassword,
         role: rowData.role,
-
       });
     }
   }
@@ -43,7 +45,7 @@ class Signup extends Component {
   };
 
   validateForm = () => {
-    const { firstname, lastname, email, mobile, password, confirmPassword,role, acceptTerms } = this.state;
+    const { firstname, lastname, email, mobile, password, confirmPassword, role, acceptTerms } = this.state;
     let isValid = true;
     let errors = {};
 
@@ -92,46 +94,20 @@ class Signup extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const { firstname, lastname, email, mobile, password, confirmPassword,role,acceptTerms } = this.state;
+    const { firstname, lastname, email, mobile, password, confirmPassword, role, acceptTerms } = this.state;
 
-    // Validate the form
+   
     if (!this.validateForm()) {
-
       return;
     }
 
-//     const rowData = this.props.location?.state?.rowData || null;
-//     const method = rowData ? 'PUT' : 'POST';
-//     const url = rowData
-//       ? `https://67286ba3270bd0b975555c01.mockapi.io/loginpage/Register/${rowData.id}`
-//       : 'https://67286ba3270bd0b975555c01.mockapi.io/loginpage/Register';
+    const rolePage = role === 'Admin' ? '/Admin' : '/User';
 
-//     try {
-//       const response = await fetch(url, {
-//         method,
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({
-//           firstname,
-//           lastname,
-//           email,
-//           mobile,
-//           password,
-//           confirmPassword,
-//           acceptTerms,
-//         }),
-//       });
-
-//       if (response.ok) {
-        
-//         this.setState({ navigateToDatastorage: true });
-//       } else {
-//         const errorData = await response.json();
-//         alert(`Error: ${errorData.message}`);
-//       }
-//     } catch (error) {
-//       console.error('Error:', error);
-//     }
- };
+    this.setState({
+      navigateToRolePage: true,
+      rolePage: rolePage,
+    });
+  };
 
   togglePasswordVisibility = () => {
     this.setState((prevState) => ({
@@ -158,184 +134,184 @@ class Signup extends Component {
       confirmPasswordVisible,
       role,
       errors,
-      navigateToDatastorage,
+      navigateToRolePage,
+      rolePage,
     } = this.state;
 
-    if (navigateToDatastorage) {
-      return <Navigate to="/Datastorage" />;
+    if (navigateToRolePage) {
+      return <Navigate to={rolePage} />;
     }
 
     return (
-        <form className="form2" style={{ width: '500px' }} onSubmit={this.handleSubmit}>
-          <h1 className="head1">{this.props.location?.state?.rowData ? 'Edit Form' : 'Register Form'}</h1>
-          <div style={{ display: 'flex' }}>
-            <div className="label1 mt-3" style={{ width: '100%' }}>
-              <label>Firstname</label>
-              <input
-                className="box2"
-                name="firstname"
-                value={firstname}
-                onChange={this.handleChange}
-                placeholder="Firstname"
-                style={{ width: '96%' }}
-              />
-              {errors?.firstname && <span className="error">{errors.firstname}</span>}
-            </div>
-            <div className="label1 mt-3" style={{ width: '100%' }}>
-              <label>Lastname</label>
-              <input
-                className="box2"
-                name="lastname"
-                value={lastname}
-                onChange={this.handleChange}
-                placeholder="Lastname"
-                autoComplete="off"
-                style={{ width: '100%' }}
-              />
-              {errors?.lastname && <span className="error">{errors.lastname}</span>}
-            </div>
-          </div>
-          <div className="label2" style={{ width: '100%' }}>
-            <label>Email</label>
+      <form className="form2" style={{ width: '500px' }} onSubmit={this.handleSubmit}>
+        <h1 className="head1">{this.props.location?.state?.rowData ? 'Edit Form' : 'Register Form'}</h1>
+        <div style={{ display: 'flex' }}>
+          <div className="label1 mt-3" style={{ width: '100%' }}>
+            <label>Firstname</label>
             <input
-              className="box3"
-              name="email"
-              value={email}
+              className="box2"
+              name="firstname"
+              value={firstname}
               onChange={this.handleChange}
-              placeholder="Email"
+              placeholder="Firstname"
+              style={{ width: '96%' }}
+            />
+            {errors?.firstname && <span className="error">{errors.firstname}</span>}
+          </div>
+          <div className="label1 mt-3" style={{ width: '100%' }}>
+            <label>Lastname</label>
+            <input
+              className="box2"
+              name="lastname"
+              value={lastname}
+              onChange={this.handleChange}
+              placeholder="Lastname"
+              autoComplete="off"
               style={{ width: '100%' }}
             />
-            {errors?.email && <span className="error">{errors.email}</span>}
+            {errors?.lastname && <span className="error">{errors.lastname}</span>}
           </div>
-          <div className="label2" style={{ width: '100%' }}>
-            <label>Mobile Number</label>
+        </div>
+        <div className="label2" style={{ width: '100%' }}>
+          <label>Email</label>
+          <input
+            className="box3"
+            name="email"
+            value={email}
+            onChange={this.handleChange}
+            placeholder="Email"
+            style={{ width: '100%' }}
+          />
+          {errors?.email && <span className="error">{errors.email}</span>}
+        </div>
+        <div className="label2" style={{ width: '100%' }}>
+          <label>Mobile Number</label>
+          <input
+            className="box3"
+            name="mobile"
+            value={mobile}
+            onChange={this.handleChange}
+            type="text"
+            placeholder="Mobile Number"
+            style={{ width: '100%' }}
+          />
+          {errors?.mobile && <span className="error">{errors.mobile}</span>}
+        </div>
+        <div className="label1" style={{ width: '100%' }}>
+          <label>Password</label>
+          <div style={{ display: 'flex', position: 'relative' }}>
             <input
-              className="box3"
-              name="mobile"
-              value={mobile}
+              className="box2"
+              name="password"
+              type={passwordVisible ? 'text' : 'password'}
+              value={password}
               onChange={this.handleChange}
-              type="text"
-              placeholder="Mobile Number"
+              placeholder="Password"
               style={{ width: '100%' }}
             />
-            {errors?.mobile && <span className="error">{errors.mobile}</span>}
-          </div>
-          <div className="label1" style={{ width: '100%' }}>
-            <label>Password</label>
-            <div style={{ display: 'flex', position: 'relative' }}>
-              <input
-                className="box2"
-                name="password"
-                type={passwordVisible ? 'text' : 'password'}
-                value={password}
-                onChange={this.handleChange}
-                placeholder="Password"
-                style={{ width: '100%' }}
-              />
-              <span
-                className="eye-icon"
-                style={{
-                  position: 'absolute',
-                  right: '10px',
-                  top: '4px',
-                  cursor: 'pointer',
-                  fontSize: '15px',
-                  color: 'gray',
-                }}
-                onClick={this.togglePasswordVisibility}
-              >
-                {passwordVisible ? (
-                  <i className="fas fa-eye" style={{ color: 'rgb(235, 32, 59)' }}></i>
-                ) : (
-                  <i className="fas fa-eye-slash" style={{ color: 'rgb(235, 32, 59)' }}></i>
-                )}
-              </span>
-            </div>
-            {errors?.password && <span className="error">{errors.password}</span>}
-          </div>
-          <div className="label1" style={{ width: '100%' }}>
-            <label>Confirm Password</label>
-            <div style={{ display: 'flex', position: 'relative' }}>
-              <input
-                className="box2"
-                name="confirmPassword"
-                type={confirmPasswordVisible ? 'text' : 'password'}
-                value={confirmPassword}
-                onChange={this.handleChange}
-                placeholder="Confirm Password"
-                style={{ width: '100%' }}
-              />
-              <span
-                className="eye-icon"
-                style={{
-                  position: 'absolute',
-                  right: '10px',
-                  top: '4px',
-                  cursor: 'pointer',
-                  fontSize: '15px',
-                  color: 'gray',
-                }}
-                onClick={this.toggleConfirmPasswordVisibility}
-              >
-                {confirmPasswordVisible ? (
-                  <i className="fas fa-eye" style={{ color: 'rgb(235, 32, 59)' }}></i>
-                ) : (
-                  <i className="fas fa-eye-slash" style={{ color: 'rgb(235, 32, 59)' }}></i>
-                )}
-              </span>
-            </div>
-            {errors?.confirmPassword && <span className="error">{errors.confirmPassword}</span>}
-          </div>
-          <div className="label2" style={{ width: '100%' }}>
-          <label>
-           Role
-            </label>
-            <select
-              className="box3"
-              name="role"
-              value={role}
-              onChange={this.handleChange}
-              placeholder="Role"
-              style={{ width: '100%' }}
-
+            <span
+              className="eye-icon"
+              style={{
+                position: 'absolute',
+                right: '10px',
+                top: '4px',
+                cursor: 'pointer',
+                fontSize: '15px',
+                color: 'gray',
+              }}
+              onClick={this.togglePasswordVisibility}
             >
-              <option value="" disabled>
-                Select a Role
-              </option>
-              <option value="Admin">Admin</option>
-              <option value="User">User</option>
-              </select>
-             
-              {errors?.role && <span className="error">{errors.role}</span>}
-
-              </div>
-          <div style={{ margin: '15px 0' }}>
-            <label>
-              <input
-                type="checkbox"
-                name="acceptTerms"
-                checked={acceptTerms}
-                onChange={this.handleChange}
-                style={{ marginRight: '10px' }}
-              />
-              I accept the terms and conditions
-            </label>
-            {errors?.acceptTerms && (
-              <span className="error" style={{ color: 'red' }}>
-                {errors.acceptTerms}
-              </span>
-            )}
+              {passwordVisible ? (
+                <i className="fas fa-eye" style={{ color: 'rgb(235, 32, 59)' }}></i>
+              ) : (
+                <i className="fas fa-eye-slash" style={{ color: 'rgb(235, 32, 59)' }}></i>
+              )}
+            </span>
           </div>
-          <button className="button2" type="submit" style={{ width: '100%' }}>
-            {this.props.location?.state?.rowData ? 'Update' : 'Register'}
-          </button>
-          <p className="para2">
-            Already have an Account?{' '}
-            <a href="#" onClick={() => this.props.history.push('/Signin')} className="link" style={{ color: 'rgb(235, 32, 59)' }}>
-              Login
-            </a>
-          </p>
-        </form>
+          {errors?.password && <span className="error">{errors.password}</span>}
+        </div>
+        <div className="label1" style={{ width: '100%' }}>
+          <label>Confirm Password</label>
+          <div style={{ display: 'flex', position: 'relative' }}>
+            <input
+              className="box2"
+              name="confirmPassword"
+              type={confirmPasswordVisible ? 'text' : 'password'}
+              value={confirmPassword}
+              onChange={this.handleChange}
+              placeholder="Confirm Password"
+              style={{ width: '100%' }}
+            />
+            <span
+              className="eye-icon"
+              style={{
+                position: 'absolute',
+                right: '10px',
+                top: '4px',
+                cursor: 'pointer',
+                fontSize: '15px',
+                color: 'gray',
+              }}
+              onClick={this.toggleConfirmPasswordVisibility}
+            >
+              {confirmPasswordVisible ? (
+                <i className="fas fa-eye" style={{ color: 'rgb(235, 32, 59)' }}></i>
+              ) : (
+                <i className="fas fa-eye-slash" style={{ color: 'rgb(235, 32, 59)' }}></i>
+              )}
+            </span>
+          </div>
+          {errors?.confirmPassword && <span className="error">{errors.confirmPassword}</span>}
+        </div>
+        <div className="label2" style={{ width: '100%' }}>
+          <label>Role</label>
+          <select
+            className="box3"
+            name="role"
+            value={role}
+            onChange={this.handleChange}
+            style={{ width: '100%' }}
+          >
+            <option value="" disabled>
+              Select a Role
+            </option>
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
+          </select>
+          {errors?.role && <span className="error">{errors.role}</span>}
+        </div>
+        <div style={{ margin: '15px 0' }}>
+          <label>
+            <input
+              type="checkbox"
+              name="acceptTerms"
+              checked={acceptTerms}
+              onChange={this.handleChange}
+              style={{ marginRight: '10px' }}
+            />
+            I accept the terms and conditions
+          </label>
+          {errors?.acceptTerms && (
+            <span className="error" style={{ color: 'red' }}>
+              {errors.acceptTerms}
+            </span>
+          )}
+        </div>
+        <button className="button2" type="submit" style={{ width: '100%' }}>
+          {this.props.location?.state?.rowData ? 'Update' : 'Register'}
+        </button>
+        <p className="para2">
+          Already have an Account?{' '}
+          <a
+            href="#"
+            onClick={() => this.props.history.push('/Signin')}
+            className="link"
+            style={{ color: 'rgb(235, 32, 59)' }}
+          >
+            Login
+          </a>
+        </p>
+      </form>
     );
   }
 }
