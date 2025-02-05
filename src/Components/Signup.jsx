@@ -10,6 +10,7 @@ class Signup extends Component {
       lastname: '',
       email: '',
       mobile: '',
+      gender:'',
       password: '',
       confirmPassword: '',
       role: '',
@@ -17,8 +18,8 @@ class Signup extends Component {
       passwordVisible: false,
       confirmPasswordVisible: false,
       navigateToDatastorage: false,
-      navigateToRolePage: false, // Track role-based navigation
-      rolePage: '', // Store the role-based URL
+      navigateToRolePage: false, 
+      rolePage: '', 
     };
   }
 
@@ -30,6 +31,7 @@ class Signup extends Component {
         lastname: rowData.lastname,
         email: rowData.email,
         mobile: rowData.mobile,
+        gender: rowData.gender,
         password: rowData.password,
         confirmPassword: rowData.confirmPassword,
         role: rowData.role,
@@ -45,7 +47,7 @@ class Signup extends Component {
   };
 
   validateForm = () => {
-    const { firstname, lastname, email, mobile, password, confirmPassword, role, acceptTerms } = this.state;
+    const { firstname, lastname, email, mobile,gender, password, confirmPassword, role, acceptTerms } = this.state;
     let isValid = true;
     let errors = {};
 
@@ -78,6 +80,10 @@ class Signup extends Component {
       isValid = false;
       errors.confirmPassword = 'Passwords do not match';
     }
+    if (!gender) {
+      isValid = false;
+      errors.gender = 'Gender is required';
+    }
     if (!role) {
       isValid = false;
       errors.role = 'Role is required';
@@ -94,7 +100,7 @@ class Signup extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const { firstname, lastname, email, mobile, password, confirmPassword, role, acceptTerms } = this.state;
+    const { firstname, lastname, email, mobile,gender, password, confirmPassword, role, acceptTerms } = this.state;
 
    
     if (!this.validateForm()) {
@@ -127,6 +133,7 @@ class Signup extends Component {
       lastname,
       email,
       mobile,
+      gender,
       password,
       confirmPassword,
       acceptTerms,
@@ -197,6 +204,27 @@ class Signup extends Component {
           />
           {errors?.mobile && <span className="error">{errors.mobile}</span>}
         </div>
+
+        <div className="label2" style={{ width: '100%' }}>
+          <label>Gender</label>
+          <select
+            className="box3"
+            name="gender"
+            value={gender}
+            onChange={this.handleChange}
+            style={{ width: '100%' }}
+          >
+            <option value="" disabled>
+              Select a gender
+            </option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Others">Others</option>
+
+          </select>
+          {errors?.gender && <span className="error">{errors.gender}</span>}
+        </div>
+
         <div className="label1" style={{ width: '100%' }}>
           <label>Password</label>
           <div style={{ display: 'flex', position: 'relative' }}>
@@ -280,6 +308,8 @@ class Signup extends Component {
           </select>
           {errors?.role && <span className="error">{errors.role}</span>}
         </div>
+
+       
         <div style={{ margin: '15px 0' }}>
           <label>
             <input
