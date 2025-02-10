@@ -5,6 +5,7 @@ import Signup from './Components/Signup';
 import Profile from './Components/Profile';
 import Admin from './Components/Admin';
 import User from './Components/User';
+import Landing from './Components/Landing';
 
 
 
@@ -17,6 +18,8 @@ function App() {
   <Route path='/signup' element={<Signup/>}/>
   <Route path='/admin' element={<Admin/>}/>
   <Route path='/user' element={<User/>}/>
+  <Route path='/landingpage' element={<Landing/>}/>
+
 
 
 
