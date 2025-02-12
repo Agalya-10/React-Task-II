@@ -108,7 +108,6 @@ class Signin extends Component {
             </span>
           )}
           <br />
-
           <label className="label mt-2">Password</label>
           <div style={{ position: 'relative' }}>
             <input
