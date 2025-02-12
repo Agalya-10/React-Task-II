@@ -216,3 +216,16 @@
  
  
 
+  .pie-chart {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: conic-gradient(
+      red 0deg 80deg, 
+      blue 80deg 152deg, 
+      yellow 152deg 180deg,
+      rgb(0, 255, 42) 180deg 220deg,
+      rgb(255, 166, 0) 220deg 300deg,
+      rgb(255, 0, 157) 300deg 360deg
+    );
+  }
