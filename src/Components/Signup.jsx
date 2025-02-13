@@ -18,6 +18,7 @@ class Signup extends Component {
       passwordVisible: false,
       confirmPasswordVisible: false,
       navigateToDatastorage: false,
+      navigateToSignin:false,
       navigateToRolePage: false, 
       rolePage: '', 
     };
@@ -100,11 +101,15 @@ class Signup extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const { firstname, lastname, email, mobile,gender, password, confirmPassword, role, acceptTerms } = this.state;
+    const { firstname, lastname, email, mobile,gender, password, confirmPassword, role, acceptTerms,navigateToSignin } = this.state;
 
    
     if (!this.validateForm()) {
       return;
+    }
+
+    if (navigateToSignin) {
+      return <Navigate to="/Signin" />;
     }
 
     const rolePage = role === 'Admin' ? '/Admin' : '/User';
@@ -250,9 +255,9 @@ class Signup extends Component {
               onClick={this.togglePasswordVisibility}
             >
               {passwordVisible ? (
-                <i className="fas fa-eye" style={{ color: 'rgb(235, 32, 59)' }}></i>
+                <i className="fas fa-eye" style={{ color: '#2BB673' }}></i>
               ) : (
-                <i className="fas fa-eye-slash" style={{ color: 'rgb(235, 32, 59)' }}></i>
+                <i className="fas fa-eye-slash" style={{ color: '#2BB673' }}></i>
               )}
             </span>
           </div>
@@ -283,9 +288,9 @@ class Signup extends Component {
               onClick={this.toggleConfirmPasswordVisibility}
             >
               {confirmPasswordVisible ? (
-                <i className="fas fa-eye" style={{ color: 'rgb(235, 32, 59)' }}></i>
+                <i className="fas fa-eye" style={{ color:' #2BB673' }}></i>
               ) : (
-                <i className="fas fa-eye-slash" style={{ color: 'rgb(235, 32, 59)' }}></i>
+                <i className="fas fa-eye-slash" style={{ color:' #2BB673' }}></i>
               )}
             </span>
           </div>
@@ -334,9 +339,11 @@ class Signup extends Component {
           Already have an Account?{' '}
           <a
             href="#"
-            onClick={() => this.props.history.push('/Signin')}
+            
+            onClick={() => this.setState({ navigateToSignin: true })}
+            // onClick={() => this.props.history.push('/Signin')}
             className="link"
-            style={{ color: 'rgb(235, 32, 59)' }}
+            style={{ color: '#2BB673' }}
           >
             Login
           </a>

@@ -1,175 +1,108 @@
-import React, { Component } from 'react';
-import * as Yup from 'yup';
-import { Navigate } from 'react-router-dom';
+import React, { Component } from "react";
+import { TextField, Button, Paper, Typography, Box, IconButton, Grid } from "@mui/material";
+import { Facebook, Google, LinkedIn } from "@mui/icons-material";
 
 class Signin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
-      errors: {
-        email: '',
-        password: '',
-      },
-      passwordVisible: false,
-      navigateToRegister: false,
+      username: "",
+      password: "",
+      error: "",
     };
   }
 
-  validationSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email format').required('Email is required'),
-    password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
-  });
-
   handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value, error: "" });
   };
 
-  handleBlur = (e) => {};
-
-  handleSubmit = async (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
-
-    const { email, password } = this.state;
-
-    try {
-      await this.validationSchema.validate({ email, password }, { abortEarly: false });
-
-      try {
-        const response = await fetch(
-          'https://67286ba3270bd0b975555c01.mockapi.io/loginpage/Useeffecttaskone',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password }),
-          }
-        );
-
-        if (response.ok) {
-          console.log('Submitted Data:', { email, password });
-          this.setState({ navigateToRegister: true });
-        } else {
-          const errorData = await response.json();
-          alert(`Error: ${errorData.message}`);
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred while logging in. Please try again.');
-      }
-    } catch (error) {
-      const newErrors = error.inner.reduce((acc, currError) => {
-        acc[currError.path] = currError.message;
-        return acc;
-      }, {});
-
-      this.setState({ errors: newErrors });
+    const { username, password } = this.state;
+    
+    if (!username || !password) {
+      this.setState({ error: "Please fill all fields!" });
+      return;
     }
+    
+    console.log("Username:", username);
+    console.log("Password:", password);
   };
 
-  togglePasswordVisibility = () => {
-    this.setState((prevState) => ({
-      passwordVisible: !prevState.passwordVisible,
-    }));
-    
+  handleSignup = () => {
+    window.location.href = "/signup"; 
   };
 
   render() {
-    const { email, password, errors, passwordVisible, navigateToRegister } = this.state;
-
-    if (navigateToRegister) {
-      return <Navigate to="/Signup" />;
-    }
-
     return (
-      <div className="formhead">
-        <form className="form1" onSubmit={this.handleSubmit}>
-          <h1 className="head1 mt-2">Login</h1>
-          <p className="head1 mt-2 text-dark" style={{ fontSize: '13px', fontWeight: '500' }}>
-            Hello Again!
-          </p>
+      <Grid container component="main" sx={{ height: "90vh",maxWidth:"850px",margin: "2rem 0 0 16rem" }}>
+        <Grid
+          item
+          xs={12} md={6}
+          component={Paper}
+          elevation={6}
+          sx={{
+            backgroundColor: "#2BB673",
+            color: "white",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            p: 4,
+          }}
+        >
+          <Typography variant="h4" gutterBottom>
+            Hello,Friend!
+          </Typography>
+          <Typography variant="body1" sx={{ mb: 4, textAlign: "center" }}>
+            Enter your personal details and start journey with us
+          </Typography>
+          <Button
+            variant="outlined"
+            sx={{ color: "white", borderColor: "white", borderRadius: "20px", px: 4 }}
+            onClick={this.handleSignup}
+          >
+            SIGN UP
+          </Button>
+        </Grid>
 
-          <label className="label mt-1">Email</label>
-          <input
-            className="box1"
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={email}
-            onChange={this.handleChange}
-            onBlur={this.handleBlur}
-            autoComplete="off"
-          />
-          {errors.email && (
-            <span style={{ color: 'red', fontSize: '13px', paddingLeft: '14px' }}>
-              {errors.email}
-            </span>
-          )}
-          <br />
-          <label className="label mt-2">Password</label>
-          <div style={{ position: 'relative' }}>
-            <input
-              className="box1"
-              type={passwordVisible ? 'text' : 'password'}
-              name="password"
-              placeholder="Password"
-              value={password}
-              onChange={this.handleChange}
-              onBlur={this.handleBlur}
-            />
-            <span
-              onClick={this.togglePasswordVisibility}
-              style={{
-                position: 'absolute',
-                right: '25px',
-                top: '55%',
-                transform: 'translateY(-50%)',
-                cursor: 'pointer',
-                fontSize: '16px',
-              }}
-            >
-              {passwordVisible ? (
-                <i className="fas fa-eye" style={{ color: 'rgb(235, 32, 59)' }}></i>
-              ) : (
-                <i className="fas fa-eye-slash" style={{ color: 'rgb(235, 32, 59)' }}></i>
-              )}
-            </span>
-          </div>
-          {errors.password && (
-            <span style={{ color: 'red', fontSize: '13px', paddingLeft: '14px' }}>
-              {errors.password}
-            </span>
-          )}
-          <br />
+        <Grid
+          item
+          xs={12} md={6}
+          component={Paper}
+          elevation={6}
+          square
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            p: 4,
+          }}
+        >
+          <Typography variant="h4" color="#2BB673" gutterBottom  sx={{ fontWeight: '500' }}>
+          Hello Again!
+          </Typography>
 
-          <div className="pass">
-            <a className="password" href="">
-              Forgot Password?
-            </a>
-          </div>
-          <br />
+          <Box sx={{ display: "flex", gap: 2, my: 2 }}>
+            <IconButton color="primary"><Facebook /></IconButton>
+            <IconButton color="error"><Google /></IconButton>
+            <IconButton color="primary"><LinkedIn /></IconButton>
+          </Box>
+          <Typography variant="body2" sx={{ mb: 2 }}>
+            or use your email Account:
+          </Typography>
 
-          <div className="submit">
-            <button className="button1 mb-2" type="submit">
+          <Box component="form" onSubmit={this.handleSubmit} sx={{ display: "flex", flexDirection: "column", width: "80%", gap: 2 }}>
+            <TextField label="Username" name="username" variant="outlined" fullWidth required onChange={this.handleChange} />
+            <TextField label="Password" name="password" type="password" variant="outlined" fullWidth required onChange={this.handleChange} />
+            {this.state.error && <Typography color="error">{this.state.error}</Typography>}
+            <Button type="submit" variant="contained" sx={{ backgroundColor: "#2BB673", borderRadius: "20px" }}>
               Login
-            </button>
-          </div>
-
-          <p className="para1">
-            Don't have an account?{' '}
-            <a
-              className="link"
-              href="#"
-              onClick={() => this.setState({ navigateToRegister: true })}
-              style={{ color: 'rgb(235, 32, 59)' }}
-            >
-              Signup
-            </a>
-          </p>
-        </form>
-      </div>
+            </Button>
+          </Box>
+        </Grid>
+      </Grid>
     );
   }
 }
