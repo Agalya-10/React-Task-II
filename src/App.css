@@ -37,80 +37,49 @@
   }
 }
 
+.form4{
+  border: none;
+  width: 400px;
+  padding: 15px;
+  margin: 10vh auto;
+  border-radius: 5px;
+  background-color: rgb(216, 210, 210);
+  /* box-shadow: rgba(60, 66, 87, 0.12) 0px 0px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px; */
+}
+
 .box3{
   width: 370px;
   padding: 6px;
   border-radius: 3px;
-  border: 0.5px solid rgb(224, 219, 219);
+  border: 1px solid gray;
   margin-bottom: 5px;
 }
-.form2{
-  border: none;
-  padding: 15px;
-  margin: 5vh auto;
-  border-radius: 5px;
-  box-shadow: rgba(60, 66, 87, 0.12) 0px 0px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
-}
-.head1{
-  text-align: center;
-  font-weight: bolder;
-  color:#2BB673;
-}
-.box2{
-  border-radius: 3px;
-  margin-bottom: 5px;
-  padding: 5px;
-  border: 0.5px solid rgb(224, 219, 219);
-}
-#cpassword{
-  margin-left: 25px;
-}
-.error{
-  color:red;
-  font-size: 12px;
-}
-.button2{
+
+.button4{
   display: inline-block;
-  padding: 3px;
-  font-size: 19px;
-  font-weight: bold;
-  margin-top: 15px;
+  padding: 8px 30px;
+  font-size: 16px;
   cursor: pointer;
   border-radius: 3px;
   border: none;
-  background-color:#2BB673;
+  background-color:green;
   color: white;
 }
-.button2:hover{
-  background-color:#077e44;
+.button4:hover{
+  background-color: rgb(30, 155, 30);
   color: black;
 }
-.para2{
-  text-align: center;}
-  .box2:focus {
-    border: 1px solid#2BB673; 
-    outline: none; 
-  }
-  .box2:focus {
-    border: 1px solid#2BB673; 
-    outline: none; 
-  }
-  .box3:focus {
-    border: 1px solid#2BB673; 
-    outline: none; 
-  } 
- 
-
-  /* .pie-chart {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: conic-gradient(
-      red 0deg 80deg, 
-      blue 80deg 152deg, 
-      yellow 152deg 180deg,
-      rgb(0, 255, 42) 180deg 220deg,
-      rgb(255, 166, 0) 220deg 300deg,
-      rgb(255, 0, 157) 300deg 360deg
-    );
-  } */
+.button5{
+  display: inline-block;
+  padding: 8px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 3px;
+  border: none;
+  background-color:rgb(189, 8, 8);
+  color: white;
+}
+.button5:hover{
+  background-color:rgb(214, 21, 21);
+  color: black;
+}

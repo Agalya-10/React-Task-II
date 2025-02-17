@@ -1,11 +1,12 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Signin from './Components/Signin';
-import Signup from './Components/Signup';
+
 import Profile from './Components/Profile';
 import Admin from './Components/Admin';
 import User from './Components/User';
 import Landing from './Components/Landing';
+import Signin from './Components/Signin';
+import Signup from './Components/Signup';
 
 
 
@@ -20,15 +21,9 @@ function App() {
   <Route path='/user' element={<User/>}/>
   <Route path='/landingpage' element={<Landing/>}/>
 
-
-
-
-  
-
   </Routes>
   </BrowserRouter>
   );
 }
 
 export default App;
-
