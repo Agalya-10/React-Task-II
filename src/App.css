@@ -37,3 +37,49 @@
   }
 }
 
+.form4{
+  border: none;
+  width: 400px;
+  padding: 15px;
+  margin: 10vh auto;
+  border-radius: 5px;
+  background-color: rgb(216, 210, 210);
+  /* box-shadow: rgba(60, 66, 87, 0.12) 0px 0px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px; */
+}
+
+.box3{
+  width: 370px;
+  padding: 6px;
+  border-radius: 3px;
+  border: 1px solid gray;
+  margin-bottom: 5px;
+}
+
+.button4{
+  display: inline-block;
+  padding: 8px 30px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 3px;
+  border: none;
+  background-color:green;
+  color: white;
+}
+.button4:hover{
+  background-color: rgb(30, 155, 30);
+  color: black;
+}
+.button5{
+  display: inline-block;
+  padding: 8px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 3px;
+  border: none;
+  background-color:rgb(189, 8, 8);
+  color: white;
+}
+.button5:hover{
+  background-color:rgb(214, 21, 21);
+  color: black;
+}
