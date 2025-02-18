@@ -8,15 +8,7 @@ class Landing extends Component {
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary p-2">
           <div className="container-fluid">
             <Link className="navbar-brand fw-bold fs-3" to="/">Landing Page</Link>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
+            <button className="navbar-toggler" type="button"data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"aria-expanded="false"aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
@@ -51,7 +43,6 @@ class Landing extends Component {
           </div>
         </nav>
 
-        
         <div className="container mt-4">
           <div className="row">
            
@@ -64,8 +55,6 @@ class Landing extends Component {
                 </div>
               </div>
             </div>
-
-           
             <div className="col-md-3">
               <div className="card text-center p-3 shadow">
                 <i className="fa fa-calendar-alt fa-3x text-success"></i>
@@ -76,7 +65,6 @@ class Landing extends Component {
               </div>
             </div>
 
-           
             <div className="col-md-3">
               <div className="card text-center p-3 shadow">
                 <i className="fa fa-chart-bar fa-3x text-warning"></i>
@@ -87,7 +75,6 @@ class Landing extends Component {
               </div>
             </div>
 
-           
             <div className="col-md-3">
               <div className="card text-center p-3 shadow">
                 <i className="fa fa-cogs fa-3x text-danger"></i>
