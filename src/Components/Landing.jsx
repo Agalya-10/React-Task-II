@@ -86,7 +86,7 @@ class Landing extends Component {
             </div>
           </div>
         </div>
-        {/* <div className="pie-chart"></div> */}
+     
       </>
     );
   }
